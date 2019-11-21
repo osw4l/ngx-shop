@@ -1,0 +1,96 @@
+<div class="container-fluid modal-ancho mt-4">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <span>
+                    <h2 class="float-left">
+                        DETALLE DE LA VENTA
+                    </h2>
+                </span>
+            </div>
+            <div class="card-body">
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Usuario
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="three">
+                        <tr>
+                            <td data-titulo="Id">
+                                <div class="content"><span class="display font-weight-bold">{{data_detalle.id}}  </span></div>
+                            </td>
+                            <td data-titulo="Nombre">
+                                <div class="content"><span class="display font-weight-bold"> {{data_detalle.fecha}}  </span></div>
+                            </td>
+                            <td data-titulo="Apellido">
+                                <div class="content"><span class="display font-weight-bold"> {{data_detalle.user.first_name}}  {{data_detalle.user.last_name}} </span></div>
+                            </td>
+                            <td data-titulo="Total">
+                                <div><span class="display font-weight-bold"> {{data_detalle.valor_total}}  </span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <span>
+                    <h2 class="float-left">
+                        PRODUCTOS DE LA VENTA
+                    </h2>
+                </span>
+            </div>
+            <div class="card-body">
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Precio
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="three">
+                        <tr *ngFor="let dataBody of data_detalle_productos">
+                            <td data-titulo="Id">
+                                <div class="content"><span class="display font-weight-bold">{{dataBody.producto.nombre}}  </span></div>
+                            </td>
+                            <td data-titulo="Nombre">
+                                <div class="content"><span class="display font-weight-bold"> {{dataBody.producto.cantidad}}  </span></div>
+                            </td>
+                            <td data-titulo="Apellido">
+                                <div class="content"><span class="display font-weight-bold"> {{dataBody.producto.precio}}</span></div>
+                            </td>
+                            <td data-titulo="Total">
+                                <div><span class="display font-weight-bold"> {{data_detalle.valor_total}}  </span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

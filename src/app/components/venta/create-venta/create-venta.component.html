@@ -1,0 +1,149 @@
+<div *ngIf="!success; else ventaSuccess">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Crear venta</h2>
+      </div>
+      <div class="col-md-8">
+        <ng-container *ngIf="error; else commonAlert">
+          <div class="alert alert-danger" role="alert">
+            {{ error.error.error }}
+          </div>
+        </ng-container>
+
+        <ng-template #commonAlert>
+          <div class="alert alert-info" role="alert">
+            Agrega productos para crear una nueva venta
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-center pb-5">
+          <div class="card-header">
+            Buscar Producto
+          </div>
+          <div class="card-body" align="center">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group mb-3 flex-nowrap">
+                  <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-box"></i>
+                  </span>
+                  </div>
+                  <input type="text"
+                         class="form-control"
+                         (keyup)="onChangeSearch($event)"
+                         placeholder="Escriba el nombre del producto">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="list-group" *ngIf="data.length > 0">
+                  <li class="list-group-item list-group-item-action" *ngFor="let producto of data">
+                    {{ producto.nombre }} - <span class="badge badge-success"
+                                                  [class.badge-danger]="producto.cantidad === 0">{{ producto.cantidad }}</span>
+                    <button class="btn btn-success btn-xs float-right"
+                            [disabled]="producto.cantidad === 0"
+                            (click)="addProducto(producto.id, producto.nombre, producto.cantidad, producto.precio)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card text-center pb-5">
+          <div class="card-header bg-primary">
+            <h3 class="float-left p-2 text-white">
+              Productos del pedido
+            </h3>
+            <button class="btn btn-success btn-lg float-right pt-2"
+                    [class.btn-light]="productos_venta.length === 0"
+                    [disabled]="productos_venta.length === 0"
+                    (click)="enviarPedido()">
+              Enviar pedido <i class="fa fa-send"></i>
+            </button>
+          </div>
+          <div class="card-body" align="center">
+            <ul class="list-group" *ngIf="productos_venta.length > 0">
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let producto of productos_venta; let pos = index">
+                <div class="fz-2 float-left">
+                  <span class="badge badge-pill badge-success" [class.badge-warning]="producto.cantidad === 1">
+                    {{ producto.cantidad }}
+                  </span>
+                  <span>
+                    {{ producto.nombre }}
+                  </span>
+                  <span class="badge badge-info little" *ngIf="producto.cantidad === producto.disponible">
+                      cantidad maxima permitida
+                  </span>
+                </div>
+                <button class="btn btn-success btn-xs float-right ml-1"
+                        [disabled]="producto.cantidad === producto.disponible"
+                        (click)="agregar(pos)">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-warning btn-xs float-right ml-1" [disabled]="producto.cantidad === 1"
+                        (click)="descontar(pos)">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <button class="btn btn-danger btn-xs float-right  ml-1"
+                        (click)="remover(pos)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <br>
+                <table class="table table-hover table-bordered table-striped text-center">
+                  <thead>
+                  <tr>
+                    <th>Valor unitario</th>
+                    <th>Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <code>{{ producto.valor | number: '.0'}}</code>
+                    </td>
+                    <td>
+                      <code>{{ (producto.valor * producto.cantidad) | number: '.0' }}</code>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #ventaSuccess>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <div class="jumbotron text-center">
+          <h1 class="display-4">Venta exitosa!</h1>
+          <p class="lead">Los productos fueron enviados con exito</p>
+          <div class="row">
+            <div class="col-md-6">
+              <a class="btn btn-primary btn-lg ml-1" routerLink="/ventas" role="button">volver a las ventas</a>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-success btn-lg" (click)="setSuccess(false)">crear venta nueva</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

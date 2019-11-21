@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Blinker', sans-serif !important;
+}
+
+.selector {
+    background-image: url(https://www.mywaste.care/Content/img/login-background.jpg);
+    height: auto;
+    background-position: center;
+    background-size: cover;
+}
+
+.justify-content-center {
+  display: flex !important;
+  justify-content: center !important;
+}

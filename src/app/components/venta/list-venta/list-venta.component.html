@@ -1,0 +1,67 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <span>
+                <h2 class="float-left">
+                    LISTA DE VENTAS
+                </h2>
+
+                 <button routerLink="/crear-venta" class="float-right" mat-raised-button color="primary">
+                    Add venta <i class="fas fa-plus-circle"></i>
+                  </button>
+            </span>
+        </div>
+        <div class="card-body">
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Apellido
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            Detalle
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="three">
+                    <tr *ngFor="let bodydata of venta_data">
+                        <td data-titulo="Id">
+                            <div class="content"><span class="display font-weight-bold">{{bodydata.id}}  </span></div>
+                        </td>
+                        <td data-titulo="Nombre">
+                            <div class="content"><span class="display font-weight-bold"> {{bodydata.user.first_name}}  </span></div>
+                        </td>
+                        <td data-titulo="Apellido">
+                            <div class="content"><span class="display font-weight-bold"> {{bodydata.user.last_name}}  </span></div>
+                        </td>
+                        <td data-titulo="Total">
+                            <div><span class="display font-weight-bold"> {{ bodydata.valor_total | number: '.0' }}  </span></div>
+                        </td>
+                        <td data-titulo="Acciones">
+                            <div>
+                                <span class="display">
+                                  <button (click)="openDialog(bodydata)" mat-raised-button color="primary">
+                                    <i class="far fa-eye"></i>
+                                  </button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="justify-content-center" *ngIf="pages > 1">
+    <ngb-pagination class="center" style="display: compact" [(page)]="current_url" [pageSize]="1" [directionLinks]="true" [ellipses]="true" [maxSize]="4" [rotate]="true" (pageChange)="setPage($event)" [collectionSize]="pages">
+    </ngb-pagination>
+</div>

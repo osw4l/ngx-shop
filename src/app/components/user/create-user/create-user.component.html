@@ -1,0 +1,45 @@
+<div class="container-fluid mt-4">
+    <div class="alert alert-primary" role="alert">
+        {{message}}
+    </div>
+    <div class="col-lg-12">
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class='col-lg-12'>
+            <p>
+                <label>User name</label>
+                <input type="text" #username="ngModel" class="form-control" name="username" [(ngModel)]="user.username" required>
+                <span class="alert alert-danger" *ngIf="username.invalid && username.touched">
+                  El username es obligatorio
+                </span>
+            </p>
+            <p>
+                <label>Nombre</label>
+                <input type="text" #first_name="ngModel" name="first_name" class="form-control" [(ngModel)]="user.first_name" required>
+                <span class="alert alert-danger" *ngIf="first_name.invalid && first_name.touched">
+                  El Nombre  es obligatorio
+                </span>
+            </p>
+            <p>
+                <label>Apellido</label>
+                <input type="text" #last_name="ngModel" name="last_name" class="form-control" [(ngModel)]="user.last_name" required>
+                <span class="alert alert-danger" *ngIf="last_name.invalid && last_name.touched">
+                  El Apellido  es obligatorio
+                </span>
+            </p>
+            <p>
+                <label>Email</label>
+                <input type="email" #email="ngModel" name="email" class="form-control" [(ngModel)]="user.email" required>
+                <span class="alert alert-danger" *ngIf="email.invalid && email.touched">
+                  El email  es obligatorio
+                </span>
+            </p>
+            <p>
+                <label>Password</label>
+                <input type="password" #password="ngModel" name="password" class="form-control" [(ngModel)]="user.password" required>
+                <span class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                  La contraseña es incorrecta
+                </span>
+            </p>
+            <input type="submit" value="Registro" class="btn btn-primary" [disabled]="registerForm.invalid" />
+        </form>
+    </div>
+</div>

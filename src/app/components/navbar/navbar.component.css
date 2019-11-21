@@ -1,0 +1,11 @@
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.bg-nv {
+    background-color: #e14d4d!important;
+}
+
+.navbar-nav .active {
+    border-bottom: 3px solid rgb(255, 255, 255);
+}
